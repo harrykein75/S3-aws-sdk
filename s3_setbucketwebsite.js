@@ -1,22 +1,22 @@
 // Load the AWS SDK for Node.js
-var AWS = require('aws-sdk');
-// Set the region 
-AWS.config.update({region: 'REGION'});
+var AWS = require("aws-sdk");
+// Set the region
+AWS.config.update({ region: "REGION" });
 
 // Create S3 service object
-s3 = new AWS.S3({apiVersion: '2006-03-01'});
+s3 = new AWS.S3({ apiVersion: "2006-03-01" });
 
 // Create JSON for putBucketWebsite parameters
 var staticHostParams = {
-  Bucket: '',
+  Bucket: "",
   WebsiteConfiguration: {
     ErrorDocument: {
-      Key: ''
+      Key: "",
     },
     IndexDocument: {
-      Suffix: ''
+      Suffix: "",
     },
-  }
+  },
 };
 
 // Insert specified bucket name and index and error documents into params JSON
@@ -26,7 +26,7 @@ staticHostParams.WebsiteConfiguration.IndexDocument.Suffix = process.argv[3];
 staticHostParams.WebsiteConfiguration.ErrorDocument.Key = process.argv[4];
 
 // set the new website configuration on the selected bucket
-s3.putBucketWebsite(staticHostParams, function(err, data) {
+s3.putBucketWebsite(staticHostParams, function (err, data) {
   if (err) {
     // display error message
     console.log("Error", err);
